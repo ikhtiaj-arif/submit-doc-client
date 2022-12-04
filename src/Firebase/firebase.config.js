@@ -12,8 +12,23 @@ const firebaseConfig = {
   messagingSenderId: process.env.REACT_APP_messagingSenderId,
   appId: process.env.REACT_APP_appId
 };
+// const firebaseConfig = {
+//   apiKey: "AIzaSyDdk8d3y7pNvmua5y2H2QUGKR24E6SAStw",
+//   authDomain: "auth-context-tailwind-m60.firebaseapp.com",
+//   projectId: "auth-context-tailwind-m60",
+//   storageBucket: "auth-context-tailwind-m60.appspot.com",
+//   messagingSenderId: "239458055492",
+//   appId: "1:239458055492:web:2ec4330b9c40ac29819311"
+// };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 export default app;
+
+// REACT_APP_apiKey=AIzaSyDdk8d3y7pNvmua5y2H2QUGKR24E6SAStw
+// REACT_APP_authDomain=auth-context-tailwind-m60.firebaseapp.com
+// REACT_APP_projectId=auth-context-tailwind-m60
+// REACT_APP_storageBucket=auth-context-tailwind-m60.appspot.com
+// REACT_APP_messagingSenderId=239458055492
+// REACT_APP_appId=1:239458055492:web:2ec4330b9c40ac29819311
