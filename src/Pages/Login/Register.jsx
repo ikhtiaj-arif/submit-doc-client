@@ -1,10 +1,56 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Context/UserContext";
 
 const Register = () => {
+    const {user, createUser, updateUser, setLoading} = useContext(AuthContext)
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        // console.log(name, email, password);
+        createUser(email, password)
+          .then((result) => {
+            const user = result.user;
+
+            const profile = {
+                displayName: name,
+                photoURL: null,
+              };
+              updateUser(profile)
+              .then(() => {
+                // const userData = {
+                //   email: user?.email,
+                //   uid: user.uid,
+                //   displayName: user.displayName,
+                // };
+
+                console.log(user);
+
+            }).catch((e) => console.log(e.message));
+
+          })
+          .catch((e) => {
+            console.log(e.message);
+          })
+          .finally(() => {
+            setLoading(false);
+          })
+          
+        }
+
+
+
+
+
   return (
     <div>
-      <form action="w-full">
+      <form onSubmit={handleSubmit}>
         <div className="hero min-h-screen bg-base-200">
           <div className="card flex-shrink-0 md:w-2/4 lg:w-1/4 shadow-2xl bg-base-100">
             <div className="card-body">
@@ -36,7 +82,7 @@ const Register = () => {
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   placeholder="password"
                   name="password"
                   className="input input-bordered"
@@ -44,7 +90,7 @@ const Register = () => {
               </div>
 
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Register</button>
+                <button type="submit" className="btn btn-primary">Register</button>
               </div>
               <div className="divider">OR</div>
               <p className="text-sm font-medium">

@@ -1,10 +1,37 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import UserContext, { AuthContext } from "../../Context/UserContext";
 
 const Login = () => {
+    const {logInUser,setUser, setLoading} = useContext(AuthContext)
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        logInUser(email, password)
+        .then((result) => {
+          const user = result.user;
+          setUser(user)
+          console.log(user);
+        })
+        .catch((e) => {
+          console.log(e.message);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    };
+
+    
+
+
   return (
     <div>
-      <form action="">
+      <form onSubmit={handleSubmit}>
         <div className="hero min-h-screen bg-base-200">
           <div className="hero-content flex-col lg:flex-row-reverse">
            
@@ -35,7 +62,7 @@ const Login = () => {
                   </label>
                 </div>
                 <div className="form-control mt-6">
-                  <button className="btn btn-primary">Login</button>
+                  <button type="submit" className="btn btn-primary">Login</button>
                 </div>
                 <div className="divider">OR</div>
               <p className="text-sm font-medium">
