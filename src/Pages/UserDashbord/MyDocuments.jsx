@@ -6,7 +6,7 @@ import { AuthContext } from "../../Context/UserContext";
 const MyDocuments = () => {
   const { user } = useContext(AuthContext);
 
-  const url = `http://localhost:5000/documents?email=${user?.email}`;
+  const url = `https://submit-doc-server.vercel.app/documents?email=${user?.email}`;
   const {
     data: documents = [],
     isLoading,
@@ -24,9 +24,9 @@ const MyDocuments = () => {
     },
   });
   console.log(documents);
-  
-  if(isLoading){
-    return <Spinner/>
+
+  if (isLoading) {
+    return <Spinner />;
   }
 
   return (

@@ -1,14 +1,12 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../Context/UserContext";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import Spinner from "../../Components/Spinner";
-
 
 const Submit = () => {
   const { user, loading } = useContext(AuthContext);
   const navigate = useNavigate();
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -19,10 +17,13 @@ const Submit = () => {
     const message = form.message.value;
 
     const document = {
-      name, email, course, message
-    }
+      name,
+      email,
+      course,
+      message,
+    };
     // console.log(name, email, course, message);
-    fetch("http://localhost:5000/documents", {
+    fetch("https://submit-doc-server.vercel.app/documents", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -38,10 +39,9 @@ const Submit = () => {
           navigate("/dashboard");
         }
       });
-
-  }
-  if(loading){
-    return <Spinner/>
+  };
+  if (loading) {
+    return <Spinner />;
   }
 
   return (
@@ -67,21 +67,19 @@ const Submit = () => {
             placeholder="Email"
             className="input input-bordered w-full mb-4"
           />
-              <select
-              name="course"
-              className="select select-bordered w-full max-w-xs hover:select-success"
-            >
-              <option disabled selected>
-                Chose Your Course
-              </option>
+          <select
+            name="course"
+            className="select select-bordered w-full max-w-xs hover:select-success"
+          >
+            <option disabled selected>
+              Chose Your Course
+            </option>
 
-              <option value="React.Js">React.JS</option>
-              <option value="Express">Express</option>
-              <option value="Next.js">Next.js</option>
-              <option value="Redux">Redux</option>
-            </select>
-
-          
+            <option value="React.Js">React.JS</option>
+            <option value="Express">Express</option>
+            <option value="Next.js">Next.js</option>
+            <option value="Redux">Redux</option>
+          </select>
 
           <textarea
             className="textarea bg-gray-200 w-full mb-4"
