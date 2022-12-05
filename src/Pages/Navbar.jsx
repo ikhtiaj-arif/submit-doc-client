@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link }from 'react-router-dom'
 import { AuthContext } from '../Context/UserContext';
+import { FaOutdent } from "react-icons/fa";
 
 const Navbar = () => {
   const { user, logOutUser } = useContext(AuthContext) 
@@ -76,7 +77,7 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           <label htmlFor="dashboard-drawer" className=" drawer-button md:hidden">
-            {/* <FaOutdent className="w-4 h-4 mr-3" /> */}
+            <FaOutdent className="w-4 h-4 mr-3" />
           </label>
         </div>
       </div>

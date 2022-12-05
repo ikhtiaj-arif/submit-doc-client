@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../Context/UserContext";
 import { useNavigate } from 'react-router-dom';
+import toast from "react-hot-toast";
 
 
 const Submit = () => {
@@ -32,8 +33,8 @@ const Submit = () => {
       .then((data) => {
         console.log(data);
         if (data.acknowledged) {
-          // toast.success("booking confirmed!");
-          // navigate("/dashboard/myProducts");
+          toast.success("booking confirmed!");
+          navigate("/dashboard");
         }
       });
 

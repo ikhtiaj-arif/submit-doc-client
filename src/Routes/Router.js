@@ -1,6 +1,8 @@
+import Dashboard from "../Layout/Dashboard";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Login/Register";
 import Submit from "../Pages/Submit/Submit";
+import MyDocuments from "../Pages/UserDashbord/MyDocuments";
 import PrivateRoute from "./PrivateRoute";
 
 const { createBrowserRouter } = require("react-router-dom");
@@ -30,6 +32,21 @@ const router = createBrowserRouter([
                 path: '/submit',
                 element: <PrivateRoute><Submit/></PrivateRoute>
             },
+        ]
+    },
+    {
+        path: "/dashboard",
+        element: (
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+        ),
+        // errorElement: <ErrorPage />,
+        children: [
+            {
+                path: '/dashboard',
+                element: <MyDocuments/>
+            }
         ]
     }
 ])
