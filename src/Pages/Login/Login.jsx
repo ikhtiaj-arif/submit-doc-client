@@ -1,9 +1,13 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Setuser } from "../../API/Setuser";
 import UserContext, { AuthContext } from "../../Context/UserContext";
 
 const Login = () => {
-    const {logInUser,setUser, setLoading} = useContext(AuthContext)
+    const {logInUser,setUser, setLoading} = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
 
     const handleSubmit = (event) => {
@@ -15,7 +19,12 @@ const Login = () => {
         logInUser(email, password)
         .then((result) => {
           const user = result.user;
-          setUser(user)
+
+          const currUser = {
+            email: user.email,
+          };
+          Setuser(currUser);
+          navigate(from, { replace: true });
           console.log(user);
         })
         .catch((e) => {
@@ -35,7 +44,7 @@ const Login = () => {
         <div className="hero min-h-screen bg-base-200">
           <div className="hero-content flex-col lg:flex-row-reverse">
            
-            <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <div className="card flex-shrink-0 w-full  shadow-2xl bg-base-100">
               <div className="card-body">
                 <div className="form-control">
                   <label className="label">
@@ -53,7 +62,7 @@ const Login = () => {
                     <span className="label-text">Password</span>
                   </label>
                   <input
-                    type="text"
+                    type="password"
                     placeholder="******"
                     name="password"
                     className="input input-bordered"

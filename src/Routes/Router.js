@@ -1,5 +1,7 @@
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Login/Register";
+import Submit from "../Pages/Submit/Submit";
+import PrivateRoute from "./PrivateRoute";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: Main } = require("../Layout/Main");
@@ -23,6 +25,10 @@ const router = createBrowserRouter([
             {
                 path: '/login',
                 element: <Login/>
+            },
+            {
+                path: '/submit',
+                element: <PrivateRoute><Submit/></PrivateRoute>
             },
         ]
     }

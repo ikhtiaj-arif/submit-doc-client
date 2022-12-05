@@ -1,9 +1,13 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Setuser } from "../../API/Setuser";
 import { AuthContext } from "../../Context/UserContext";
 
 const Register = () => {
-    const {user, createUser, updateUser, setLoading} = useContext(AuthContext)
+    const {user, createUser, updateUser, setLoading} = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
 
     const handleSubmit = (event) => {
@@ -24,13 +28,14 @@ const Register = () => {
               };
               updateUser(profile)
               .then(() => {
-                // const userData = {
-                //   email: user?.email,
-                //   uid: user.uid,
-                //   displayName: user.displayName,
-                // };
-
-                console.log(user);
+                const userData = {
+                  email: user?.email,
+                  uid: user.uid,
+                  displayName: user.displayName,
+                };
+                Setuser(userData)
+                navigate(from, { replace: true });
+                console.log(userData);
 
             }).catch((e) => console.log(e.message));
 
@@ -43,10 +48,6 @@ const Register = () => {
           })
           
         }
-
-
-
-
 
   return (
     <div>
