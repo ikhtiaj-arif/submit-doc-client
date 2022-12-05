@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
+import Spinner from "../../Components/Spinner";
 import { AuthContext } from "../../Context/UserContext";
 
 const MyDocuments = () => {
@@ -22,9 +23,10 @@ const MyDocuments = () => {
       return data;
     },
   });
+  console.log(documents);
   
   if(isLoading){
-    return <>spinner</>
+    return <Spinner/>
   }
 
   return (
@@ -43,7 +45,7 @@ const MyDocuments = () => {
             >
               <div className="flex items-center justify-center w-8 px-2 py-3 sm:p-3"></div>
               <div className="w-32 px-2 py-3 sm:p-3">
-                <p>{doc.name}</p>
+                <p>{doc.course}</p>
               </div>
               <div className="flex-1 block px-2 py-3 truncate sm:p-3 sm:w-auto">
                 {doc.message}

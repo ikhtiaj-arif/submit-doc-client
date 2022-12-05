@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Setuser } from "../../API/Setuser";
+import Spinner from "../../Components/Spinner";
 import UserContext, { AuthContext } from "../../Context/UserContext";
 
 const Login = () => {
-    const {logInUser,setUser, setLoading} = useContext(AuthContext);
+    const {logInUser,setUser,loading, setLoading} = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
@@ -36,7 +37,9 @@ const Login = () => {
     };
 
     
-
+    if(loading) {
+      return <Spinner/>
+    }
 
   return (
     <div>

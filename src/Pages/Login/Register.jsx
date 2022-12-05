@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Setuser } from "../../API/Setuser";
+import Spinner from "../../Components/Spinner";
 import { AuthContext } from "../../Context/UserContext";
 
 const Register = () => {
-    const {user, createUser, updateUser, setLoading} = useContext(AuthContext);
+    const {user, createUser, updateUser,loading, setLoading} = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
@@ -47,6 +48,9 @@ const Register = () => {
             setLoading(false);
           })
           
+        }
+        if(loading) {
+          return <Spinner/>
         }
 
   return (

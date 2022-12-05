@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../Context/UserContext";
 import { useNavigate } from 'react-router-dom';
 import toast from "react-hot-toast";
+import Spinner from "../../Components/Spinner";
 
 
 const Submit = () => {
@@ -38,6 +39,9 @@ const Submit = () => {
         }
       });
 
+  }
+  if(loading){
+    return <Spinner/>
   }
 
   return (

@@ -3,9 +3,9 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../Context/UserContext";
 
 const AdminDash = () => {
-    const { user } = useContext(AuthContext);
+   
 
-  const url = `http://localhost:5000/documents?email=${user?.email}`;
+  const url = `http://localhost:5000/documents`;
   const {
     data: documents = [],
     isLoading,
@@ -22,12 +22,12 @@ const AdminDash = () => {
       return data;
     },
   });
-  
+ 
   if(isLoading){
     return <>spinner</>
   }
 
-  
+  console.log(documents);
     return (
         <div>
              <div>
@@ -46,6 +46,7 @@ const AdminDash = () => {
               <div className="flex items-center justify-center w-8 px-2 py-3 sm:p-3"></div>
               <div className="w-32 px-2 py-3 sm:p-3">
                 <p>{doc.name}</p>
+                <p>{doc.email}</p>
               </div>
               <div className="flex-1 block px-2 py-3 truncate sm:p-3 sm:w-auto">
                 {doc.message}

@@ -5,26 +5,28 @@ import { AuthContext } from "../Context/UserContext";
 
 import { FaUsers } from "react-icons/fa";
 import Navbar from "../Pages/Navbar";
+import { GetRole } from "../API/GetRole";
+import Spinner from "../Components/Spinner";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
-  //   const [loading, setLoading] = useState(true);
-  //   const [role, setRole] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [role, setRole] = useState(null);
 
-  //   useEffect(() => {
-  //     setLoading(true);
-  // getRole(user?.email)
-  //       .then((data) => {
-  //         // console.log(data);
-  //         setRole(data);
-  //         setLoading(false);
-  //       })
-  //       .finally(setLoading(false));
-  //   }, [user?.email]);
+    useEffect(() => {
+      setLoading(true);
+  GetRole(user?.email)
+        .then((data) => {
+          // console.log(data);
+          setRole(data);
+          setLoading(false);
+        })
+        .finally(setLoading(false));
+    }, [user?.email]);
 
-  //   if (loading) {
-  //     return <div>{/* <Spinner /> */}</div>;
-  //   }
+    if (loading) {
+      return <div><Spinner /></div>;
+    }
   return (
     <div>
       <Navbar />
@@ -65,7 +67,7 @@ const Dashboard = () => {
                   <span>My Documents</span>
                 </Link>
               </li>
-              {"role" === "admin" && (
+              {role === "admin" && (
                 <>
                   <li>
                     <Link

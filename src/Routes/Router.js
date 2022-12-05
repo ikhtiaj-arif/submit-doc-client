@@ -53,7 +53,7 @@ const router = createBrowserRouter([
         element: <MyDocuments />,
       },
       {
-        path: "/dashboard/admin",
+        path: "/dashboard/allUsers",
         element: (
           <AdminRoute>
             <AdminDash />
